@@ -17,8 +17,10 @@ def getProducts():
 @app.route("/products/<string:product_name>")
 def getProduct(product_name):
     productFound = [product for product in products if product["name"] == product_name]
-    return jsonify({"product": productFound[0]})
-
+    if (len(productFound) > 0):
+        return jsonify({"product": productFound[0]})
+    else:
+        return jsonify({"message": "Product does not exist"})
 
 if __name__ == '__main__':
     app.run(debug=True, port=4000)
